@@ -1,0 +1,24 @@
+.nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #6C91BF;
+    padding: 0 1rem;
+    font-size: 1rem;
+}
+
+.nav-logo{
+    font-weight: bold;
+    color: #FFF;
+}
+
+.nav-item{
+    text-decoration: none;
+    margin: 1rem;
+    color: #FFF;
+    position:relative;
+}
+
+.nav-item:hover{
+    color:aliceblue;
+}
