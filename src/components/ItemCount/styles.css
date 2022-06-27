@@ -1,0 +1,45 @@
+.item-count{
+    max-width: 300px;
+    padding: .5rem;
+    text-align: center;
+}
+
+.item-count button{
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    color: #FFF;
+    background-color: rgb(170, 206, 13);
+    cursor:pointer;
+}
+
+.item-count button:disabled{
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.buttons-count{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .5rem 0 .5rem 0;
+}
+
+.buttons-count button{
+    padding:.5rem;
+    width: 10%;
+    border:none;
+    background: none;
+    font-size: 2rem;
+    color: rgb(49, 49, 49);
+    cursor: pointer;
+}
+
+.buttons-count span{
+    display: inline-block;
+    padding: 0 2rem 0 2rem;
+}
+
+.strong{
+    font-weight: bold;
+}
