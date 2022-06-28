@@ -31,7 +31,7 @@ const ItemCount = ({stock,initial}) =>{
     return(
         <>
         <div className="item-count">
-            <div class="strong">{product}</div>
+            <div className="strong">{product}</div>
             <div className="buttons-count">
                 <button onClick={handlerClickSubstract}>-</button>
                 <span>{(stock<=0)?"Sin stock":count}</span>
