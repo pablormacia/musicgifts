@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import ItemCount from '../../components/ItemCount';
 import ItemList from "../ItemList/ItemList";
 import Skeleton from '@mui/material/Skeleton';
-import {getData} from '../../mocks/fakeApi'
+import {getProds} from '../../mocks/fakeApi'
 
 
 const ItemListContainer = ({greeting}) =>{
@@ -11,7 +10,7 @@ const ItemListContainer = ({greeting}) =>{
     const [loading, setLoading] = useState(true);
 
     useEffect(()=>{
-        getData
+        getProds
             .then((res)=>setProductList(res))
             .catch((error)=>console.log(error))
             .finally(()=>setLoading(false))
@@ -22,9 +21,6 @@ const ItemListContainer = ({greeting}) =>{
         <>
         <div>
             <h1>{greeting}</h1>
-            <div>
-                <ItemCount initial="1" stock="5" />
-            </div> 
             <div>   
             {loading ? <Skeleton variant="rectangular" height={118}/> : <ItemList productList={productList} /> }
             </div>  

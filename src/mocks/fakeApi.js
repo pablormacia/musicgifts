@@ -7,13 +7,24 @@ const products = [
 
 ]
 
-export const getData = new Promise ((resolve, reject) =>{
+export const getProds = new Promise ((resolve, reject) =>{
     const condition = true;
     setTimeout(()=>{
        if(condition){
         resolve(products);
        }else{
-        reject("ups");
+        reject("Ups. Falló obtener lista de productos");
+       }     
+    },2000)
+})
+
+export const getProd = new Promise ((resolve, reject) =>{
+    const condition = true;
+    setTimeout(()=>{
+       if(condition){
+        resolve(products[0]);
+       }else{
+        reject("Ups. Falló obtener producto");
        }     
     },2000)
 })
