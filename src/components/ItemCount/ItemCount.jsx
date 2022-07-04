@@ -1,12 +1,12 @@
 import React, {useState} from "react";
 import './ItemCount.css';
+import Item from '../Item/Item';
 
 
-const ItemCount = ({stock,initial}) =>{
+const ItemCount = ({stock,initial,product}) =>{
 
     const [count,setcount] = useState(1);
 
-    const product = "Pentaregla"; //Producto de prueba
 
     const handlerClickAdd = () =>{
         if(count<stock){
@@ -31,7 +31,7 @@ const ItemCount = ({stock,initial}) =>{
     return(
         <>
         <div className="item-count">
-            <div className="strong">{product}</div>
+            <div className="strong">{product.name}</div>
             <div className="buttons-count">
                 <button onClick={handlerClickSubstract}>-</button>
                 <span>{(stock<=0)?"Sin stock":count}</span>

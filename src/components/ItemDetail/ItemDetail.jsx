@@ -8,7 +8,7 @@ const ItemDetail = ({product})=>{
         <h4>Producto:</h4>
         <div>      
             <Item product={product}/>
-            <ItemCount initial="1" stock="5" />
+            <ItemCount initial="1" stock={product.stock} product={product} />
         </div>
         </>
     )

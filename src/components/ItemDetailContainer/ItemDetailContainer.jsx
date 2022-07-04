@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import ItemDetail from "../ItemDetail/ItemDetail";
 import Skeleton from '@mui/material/Skeleton';
-import {getProd} from '../../mocks/fakeApi'
+import {getProd} from '../../mocks/fakeApi';
+import {useParams} from 'react-router-dom';
 
 
 const ItemDetailContainer = () =>{
@@ -9,12 +10,15 @@ const ItemDetailContainer = () =>{
     const [product,setProduct] = useState([]);
     const [loading, setLoading] = useState(true);
 
+    const {detailId} = useParams();
+
     useEffect(()=>{
-        getProd
+        setLoading(true);
+        getProd(detailId)
             .then((res)=>setProduct(res))
             .catch((error)=>console.log(error))
             .finally(()=>setLoading(false))
-    },[])
+    },[detailId])
 
 
     return(

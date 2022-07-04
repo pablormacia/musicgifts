@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import ItemList from "../ItemList/ItemList";
 import Skeleton from '@mui/material/Skeleton';
-import {getProds} from '../../mocks/fakeApi'
+import {getProds} from '../../mocks/fakeApi';
+import {useParams} from 'react-router-dom';
 
 
 const ItemListContainer = ({greeting}) =>{
@@ -9,12 +10,15 @@ const ItemListContainer = ({greeting}) =>{
     const [productList,setProductList] = useState([]);
     const [loading, setLoading] = useState(true);
 
+    const {categoryId} = useParams();
+
     useEffect(()=>{
-        getProds
+        setLoading(true);
+        getProds(categoryId)
             .then((res)=>setProductList(res))
             .catch((error)=>console.log(error))
             .finally(()=>setLoading(false))
-    },[])
+    },[categoryId])
 
 
     return(
