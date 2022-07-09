@@ -1,17 +1,30 @@
-import React from "react";
-import ItemCount from '../ItemCount/ItemCount'
-import Item from '../Item/Item'
+import React, {useState, useEffect} from "react";
+import ItemCount from '../ItemCount/ItemCount';
 import './ItemDetail.css';
 
 const ItemDetail = ({product})=>{
-    return(
-        <>
-        <h4>Producto:</h4>
-        <div className="item-detail">      
-            <Item product={product}/>
-            <ItemCount initial="1" stock={product.stock} product={product} />
+
+    const onAdd = () =>{
+        //Debe agregar la cantidad del artículo elegida por el usuario. Tal vez descontarlo del stock
+        return true;
+   }
+
+    const {id,name,description,image,stock} = product;
+    const [clicked,setClicked] = useState(false);
+
+
+    return(            
+        <div className="item-detail">
+            <div>
+                <img src={image} alt={name} />
+            </div>
+            <div>
+                <p><strong>{name}</strong></p>
+                <p>{description}</p>
+                
+                <ItemCount onClick={onAdd} initial="1" stock={stock} product={product} />
+            </div>
         </div>
-        </>
     )
 }
 

@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 const Item = ({product}) => {
     const {image, name, description,id}= product;
 
+    
+
     return (
         <>
             <div className="card">

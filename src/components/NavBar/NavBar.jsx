@@ -27,7 +27,7 @@ const NavBar = ()=>{
             <a href="/"><h1 className="nav-logo">Music Gifts</h1></a>
             <div className="nav-items">
                 {categories.map((cat)=>{
-                    return <Link class="nav-item" to={cat.path} key={cat.id}>{cat.label}</Link>
+                    return <Link className="nav-item" to={cat.path} key={cat.id}>{cat.label}</Link>
                 })}
             </div>
             <CartWidget />

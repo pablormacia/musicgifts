@@ -1,11 +1,11 @@
 import React, {useState} from "react";
 import './ItemCount.css';
-import Item from '../Item/Item';
+import {Link} from 'react-router-dom';
 
-
-const ItemCount = ({stock,initial,product}) =>{
+const ItemCount = ({stock,initial}) =>{
 
     const [count,setcount] = useState(1);
+    const [clicked,setclicked] = useState(false);
 
 
     const handlerClickAdd = () =>{
@@ -20,12 +20,13 @@ const ItemCount = ({stock,initial,product}) =>{
         }
     }
 
+    const handlerClickChange = () => {
+        setclicked(true);
+    }
+
     let onAddStatus = (stock>0) ? false : true;
 
-   const onAdd = (count) =>{
-        //Debe agregar la cantidad del artículo elegida por el usuario. Tal vez descontarlo del stock
-        return true;
-   }
+   
 
 
     return(
@@ -36,7 +37,7 @@ const ItemCount = ({stock,initial,product}) =>{
                 <span>{(stock<=0)?"Sin stock":count}</span>
                 <button onClick={handlerClickAdd}>+</button>
             </div>
-            <button disabled={onAddStatus} onClick={()=>onAdd(count)}>Agregar al carrito</button>
+            {(!clicked)?<button className="btn" onClick={handlerClickChange} disabled={onAddStatus}>Agregar al carrito</button>:<Link className="btn" to="/cart">Ver mi carrito</Link>}
         </div>
 
         </>
