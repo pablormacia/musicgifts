@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import './ItemCount.css';
 import {Link} from 'react-router-dom';
 
-const ItemCount = ({stock,initial}) =>{
+const ItemCount = ({stock,initial,onAdd}) =>{
 
     const [count,setcount] = useState(1);
     const [clicked,setclicked] = useState(false);
@@ -24,9 +24,12 @@ const ItemCount = ({stock,initial}) =>{
         setclicked(true);
     }
 
+    const handlerClickAddToCart = () =>{
+        onAdd(count);
+    }
+
     let onAddStatus = (stock>0) ? false : true;
 
-   
 
 
     return(

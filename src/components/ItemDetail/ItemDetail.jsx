@@ -1,12 +1,20 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useContext} from "react";
 import ItemCount from '../ItemCount/ItemCount';
 import './ItemDetail.css';
+import { CartContext } from "../../context/CartContext";
+import {Link} from 'react-router-dom';
+
 
 const ItemDetail = ({product})=>{
 
-    const onAdd = () =>{
-        //Debe agregar la cantidad del artículo elegida por el usuario. Tal vez descontarlo del stock
-        return true;
+    const [buyFinalized,setBuyFinalized] = useState(false);
+    const {addProduct} = useContext(CartContext)
+
+    const onAdd = (count) =>{
+        //Debe agregar al carrito la cantidad del artículo elegida por el usuario. Tal vez descontarlo del stock
+        const product = {...product, qty:count}
+        addProduct(product);
+        setBuyFinalized(true);
    }
 
     const {id,name,description,image,stock} = product;
@@ -22,7 +30,10 @@ const ItemDetail = ({product})=>{
                 <p><strong>{name}</strong></p>
                 <p>{description}</p>
                 
-                <ItemCount onClick={onAdd} initial="1" stock={stock} product={product} />
+                {buyFinalized?<Link to="/cart"><button>Finalizar compra</button></Link>:<ItemCount onAdd={onAdd} initial={1} stock={stock}/>}
+
+
+                {/* <ItemCount onClick={onAdd} initial="1" stock={stock} product={product} /> */}
             </div>
         </div>
     )
