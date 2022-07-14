@@ -12,27 +12,31 @@ const CartCustomProvider = ({children}) =>{
         //Devuelve la cantidad de productos en el carrito
         let qty=0;
         for(let i=0;i<products.length;i++){
-            qty+=products[i].stock;
+            qty+=products[i].qty;
         }
         setQtyProducts(qty);
     }
 
-    useEffect = (()=>{
+    useEffect(()=>{
         getQuantity();
     },[products])
 
-    const addProduct = (product, quantity) =>{
+    const addProduct = (product, qty) =>{
         //Agrega qty cantidad del producto al carrito
         if(isInCart(product.id)){
-            const found = products.find(prod=>prod.id ===product.id)
-            const position = products.indexOf(found);
-            const auxArray = [...products]; //Hago una copia para no modificar el array original
-            auxArray[position].qty += product.qty;
-            setProducts(auxArray);
+            amountQty(product.id, qty);
         }else{
             setProducts([...products,product])
         }
     }
+
+    const amountQty = (productId, qty) => {
+        const newProducts = products.map((prod) =>
+            prod.id === productId ? { ...prod, qty: prod.qty + qty } : prod
+        );
+
+        setProducts(newProducts);
+    };
 
     const deleteProduct = (productId) =>{
         //Elimina un producto del carrito según su id
@@ -41,8 +45,7 @@ const CartCustomProvider = ({children}) =>{
 
     const isInCart = (productId) =>{
         //Devuelve true si el producto se encuentra en el carrito o false en caso contrario
-        const found = products.find(product.id===productId);
-        return found ? true : false;
+        return products.some((prod) => prod.id === productId);
     }
 
 

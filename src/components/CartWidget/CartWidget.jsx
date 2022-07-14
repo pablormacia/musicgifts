@@ -4,12 +4,12 @@ import { CartContext } from "../../context/CartContext";
 
 const CartWidget = ()=>{
 
-    const {getQuantity} = useContext(CartContext) 
+    const {qtyProducts} = useContext(CartContext) 
 
     return(
         <>
-            <a href="/cart"><ShoppingCartIcon /></a>
-            <p>{getQuantity}</p>
+            <a href="/cart"><ShoppingCartIcon /><span>{qtyProducts}</span></a>
+            
         </>
     )
 }
