@@ -30,9 +30,9 @@ const CartCustomProvider = ({children}) =>{
         }
     }
 
-    const amountQty = (productId, qty) => {
+    const amountQty = (productId, amount) => {
         const newProducts = products.map((prod) =>
-            prod.id === productId ? { ...prod, qty: prod.qty + qty } : prod
+            prod.id === productId ? {...prod, qty: prod.qty + amount} : prod
         );
 
         setProducts(newProducts);
@@ -54,8 +54,15 @@ const CartCustomProvider = ({children}) =>{
         setProducts([]);
     }
 
+    const calcTotal = () =>{
+        return products.reduce(
+            (accum,current) => accum + current.price*current.qty,
+            0
+        );
+    }
+
     return(
-        <Provider value={{addProduct,deleteProduct,isInCart,clear,qtyProducts}}>
+        <Provider value={{addProduct,deleteProduct,isInCart,clear,calcTotal,qtyProducts,products}}>
             {children}
         </Provider>
     )

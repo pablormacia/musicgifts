@@ -13,11 +13,11 @@ const ItemDetail = ({product})=>{
     const onAdd = (count) =>{
         //Debe agregar al carrito la cantidad del artículo elegida por el usuario. Tal vez descontarlo del stock
         const prod = {...product, qty:count}
-        addProduct(prod,qty);
+        addProduct(prod,count);
         setBuyFinalized(true);
    }
 
-    const {name,description,image,stock,qty} = product;
+    const {name,description,image,price,stock,qty} = product;
 
     return(            
         <div className="item-detail">
@@ -27,6 +27,7 @@ const ItemDetail = ({product})=>{
             <div>
                 <p><strong>{name}</strong></p>
                 <p>{description}</p>
+                <p>$ {price}</p>
                 {buyFinalized?<Link to="/cart"><button>Finalizar compra</button></Link>:<ItemCount onAdd={onAdd} initial={1} stock={stock}/>}
             </div>
         </div>

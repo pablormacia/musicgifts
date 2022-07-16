@@ -8,7 +8,7 @@ const CartWidget = ()=>{
 
     return(
         <>
-            <a href="/cart"><ShoppingCartIcon /><span>{qtyProducts}</span></a>
+            {(qtyProducts>0)?<a href="/cart"><ShoppingCartIcon /><span>{qtyProducts}</span></a>:<a href="/cart"><ShoppingCartIcon /></a>}
             
         </>
     )

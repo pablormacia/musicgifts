@@ -4,7 +4,7 @@ import './Item.css';
 import { Link } from "react-router-dom";
 
 const Item = ({product}) => {
-    const {image, name, description,id}= product;
+    const {image, name, description,price, id}= product;
 
     
 
@@ -15,6 +15,7 @@ const Item = ({product}) => {
                 <div>
                     <p><strong>{name}</strong></p>
                     <p>{description}</p>
+                    <p>$ {price}</p>
                 </div>
                 <Link className="card-button" to={`/detail/${id}`}>Ver</Link>
             </div>
