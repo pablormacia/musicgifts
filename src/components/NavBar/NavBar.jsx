@@ -24,7 +24,7 @@ const categories = [
 const NavBar = ()=>{
     return(
         <nav className="nav">
-            <a href="/"><h1 className="nav-logo">Music Gifts</h1></a>
+            <Link to="/"><h1 className="nav-logo">Music Gifts</h1></Link>
             <div className="nav-items">
                 {categories.map((cat)=>{
                     return <Link className="nav-item" to={cat.path} key={cat.id}>{cat.label}</Link>

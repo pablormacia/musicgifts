@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import ItemDetail from "../ItemDetail/ItemDetail";
 import Skeleton from '@mui/material/Skeleton';
-import {getProd} from '../../mocks/fakeApi';
 import {useParams} from 'react-router-dom';
-
+import {db} from "../../firebase/firebase";
+import {doc, getDoc,collection} from "firebase/firestore";
 
 const ItemDetailContainer = () =>{
 
@@ -14,11 +14,15 @@ const ItemDetailContainer = () =>{
 
     useEffect(()=>{
         setLoading(true);
-        getProd(detailId)
-            .then((res)=>setProduct(res))
-            .catch((error)=>console.log(error))
-            .finally(()=>setLoading(false))
-    },[detailId])
+        const productsCollection = collection(db, 'productos');
+        const refDoc= doc(productsCollection,detailId);
+        getDoc(refDoc)
+            .then((result)=>setProduct({id: result.id,...result.data()}))
+            .catch((error)=>console.log(error))   
+            .finally(()=>setLoading(false)) 
+        }
+
+    ,[detailId])
 
 
     return(

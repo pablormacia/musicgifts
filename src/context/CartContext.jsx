@@ -23,6 +23,7 @@ const CartCustomProvider = ({children}) =>{
 
     const addProduct = (product, qty) =>{
         //Agrega qty cantidad del producto al carrito
+        console.log(product)
         if(isInCart(product.id)){
             amountQty(product.id, qty);
         }else{

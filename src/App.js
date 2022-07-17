@@ -15,7 +15,7 @@ function App() {
       <CartCustomProvider>
           <NavBar />
         <Routes>
-          <Route path='/' element={<ItemListContainer greeting="Bienvenidos" />} />
+          <Route path='/' element={<ItemListContainer greeting="Music Gifts - Regalos para músicos" />} />
           <Route path='/category/:categoryId' element={<ItemListContainer />} />
           <Route path='/detail/:detailId' element={<ItemDetailContainer />} />
           <Route path='/cart' element={<Cart />} />

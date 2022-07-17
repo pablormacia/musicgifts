@@ -17,7 +17,7 @@ const ItemDetail = ({product})=>{
         setBuyFinalized(true);
    }
 
-    const {name,description,image,price,stock,qty} = product;
+    const {name,description,image,price,stock} = product;
 
     return(            
         <div className="item-detail">

@@ -26,6 +26,7 @@ const Cart = () =>{
                     </div>
                ))} 
                 <div class="total">Total $: {calcTotal()}</div>
+                <div><button>Pagar</button></div>
             </div>
     );
 };
