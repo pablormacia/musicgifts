@@ -1,13 +1,40 @@
-import React, {useContext} from "react";
+import React, {useContext, useState} from "react";
 import { CartContext } from "../../context/CartContext";
 import './Cart.css';
 import {Link} from 'react-router-dom';
+import {db} from "../../firebase/firebase";
+import {collection,addDoc, serverTimestamp} from "firebase/firestore"
 
 const Cart = () =>{
      const {products,deleteProduct,calcTotal} = useContext(CartContext)
 
+     const [idSale,setIdSale] = useState("");
+
     if(products.length===0){
         return(<div className="cart-container"><h4>No hay productos en el carrito</h4><Link to="/"><button>Explorar</button></Link></div>);
+    }
+
+    const total = calcTotal();
+
+    const buyer = {
+        name: "Pepito",
+        phone: "11 1111-1111",
+        email: "pepito@grillo.com"
+    }
+
+    const checkout = () =>{
+        addDoc(collection(db,"sales"),{
+            buyer,
+            items: products,
+            date: serverTimestamp(),
+            total
+        })
+        .then((result) =>{
+            setIdSale(result.id);
+        })
+        .catch((error)=>{
+            console.log(error);
+        })
     }
 
     return(
@@ -25,8 +52,8 @@ const Cart = () =>{
                         <div><button onClick={()=>deleteProduct(prod.id)}>Eliminar</button></div>
                     </div>
                ))} 
-                <div class="total">Total $: {calcTotal()}</div>
-                <div><button>Pagar</button></div>
+                <div className="total">Total $: {total}</div>
+                <div>{(idSale)?<span>Tu id de compra es: {idSale}</span>:<button onClick={checkout}>Finalizar compra</button>}</div>
             </div>
     );
 };
