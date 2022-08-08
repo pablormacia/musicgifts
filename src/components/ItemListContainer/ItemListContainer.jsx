@@ -33,7 +33,6 @@ const ItemListContainer = ({greeting}) =>{
                         id: product.id,...product.data(),
                     }
                 })
-                //console.log(products)
                 setProductList(products)
             })
             .catch(error=>console.log(error))

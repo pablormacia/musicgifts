@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useState,useEffect} from "react";
 import { CartContext } from "../../context/CartContext";
 import './Cart.css';
 import {Link} from 'react-router-dom';
@@ -6,9 +6,19 @@ import {db} from "../../firebase/firebase";
 import {collection,addDoc, serverTimestamp} from "firebase/firestore"
 
 const Cart = () =>{
-     const {products,deleteProduct,calcTotal} = useContext(CartContext)
+     const {deleteProduct,calcTotal} = useContext(CartContext)
 
      const [idSale,setIdSale] = useState("");
+     const [products, setItems] = useState([]);
+     
+     useEffect(() => {
+        const products = JSON.parse(localStorage.getItem('items'));
+        if (products) {
+         setItems(products);
+        }
+      }, []);
+      
+     console.log(products)
 
     if(products.length===0){
         return(<div className="cart-container"><h4>No hay productos en el carrito</h4><Link to="/"><button>Explorar</button></Link></div>);

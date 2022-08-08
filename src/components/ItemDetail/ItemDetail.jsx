@@ -1,4 +1,4 @@
-import React, {useState, useContext} from "react";
+import React, {useState, useContext,useEffect} from "react";
 import ItemCount from '../ItemCount/ItemCount';
 import './ItemDetail.css';
 import { CartContext } from "../../context/CartContext";
@@ -9,13 +9,18 @@ const ItemDetail = ({product})=>{
 
     const [buyFinalized,setBuyFinalized] = useState(false);
     const {addProduct} = useContext(CartContext)
+    
+    
+
+    
 
     const onAdd = (count) =>{
-        //Debe agregar al carrito la cantidad del artículo elegida por el usuario. Tal vez descontarlo del stock
         const prod = {...product, qty:count}
         addProduct(prod,count);
         setBuyFinalized(true);
    }
+
+
 
     const {name,description,image,price,stock} = product;
 

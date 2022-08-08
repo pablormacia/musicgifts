@@ -21,13 +21,25 @@ const CartCustomProvider = ({children}) =>{
         getQuantity();
     },[products])
 
+    useEffect(()=>{
+        deleteProduct();
+    },[products])
+
+
+
     const addProduct = (product, qty) =>{
         //Agrega qty cantidad del producto al carrito
         if(isInCart(product.id)){
-            amountQty(product.id, qty);
+            const newProducts = amountQty(product.id, qty);
+            localStorage.setItem('items', JSON.stringify(newProducts));    
+            setProducts(newProducts)
+
         }else{
-            setProducts([...products,product])
+            const newProducts = [...products,product]
+            localStorage.setItem('items', JSON.stringify(newProducts));
+            setProducts(newProducts)
         }
+        
     }
 
     const amountQty = (productId, amount) => {
@@ -35,12 +47,14 @@ const CartCustomProvider = ({children}) =>{
             prod.id === productId ? {...prod, qty: prod.qty + amount} : prod
         );
 
-        setProducts(newProducts);
+        return newProducts;
     };
 
     const deleteProduct = (productId) =>{
         //Elimina un producto del carrito según su id
-        setProducts(products.filter((prod)=>prod.id!==productId));
+        const cart = products.filter((prod)=>prod.id!==productId);
+        localStorage.setItem('items', JSON.stringify(cart));
+        setProducts(cart);
     }
 
     const isInCart = (productId) =>{
@@ -51,6 +65,7 @@ const CartCustomProvider = ({children}) =>{
 
     const clear = ()=>{
         //Elimina todos los productos del carrito
+
         setProducts([]);
     }
 
@@ -60,6 +75,8 @@ const CartCustomProvider = ({children}) =>{
             0
         );
     }
+
+
 
     return(
         <Provider value={{addProduct,deleteProduct,isInCart,clear,calcTotal,qtyProducts,products}}>
