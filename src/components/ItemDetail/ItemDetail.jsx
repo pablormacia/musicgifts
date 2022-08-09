@@ -1,4 +1,4 @@
-import React, {useState, useContext,useEffect} from "react";
+import React, {useState, useContext} from "react";
 import ItemCount from '../ItemCount/ItemCount';
 import './ItemDetail.css';
 import { CartContext } from "../../context/CartContext";
@@ -33,7 +33,7 @@ const ItemDetail = ({product})=>{
                 <p><strong>{name}</strong></p>
                 <p>{description}</p>
                 <p>$ {price}</p>
-                {buyFinalized?<Link to="/cart"><button>Ir al carrito</button></Link>:<ItemCount onAdd={onAdd} initial={1} stock={stock}/>}
+                {buyFinalized?<Link to="/cart"><button className="cart-button">Ir al carrito</button></Link>:<ItemCount onAdd={onAdd} initial={1} stock={stock}/>}
             </div>
         </div>
     )

@@ -1,4 +1,4 @@
-import React, {useContext, useState,useEffect} from "react";
+import React, {useContext, useState} from "react";
 import { CartContext } from "../../context/CartContext";
 import './Cart.css';
 import {Link} from 'react-router-dom';
@@ -6,7 +6,7 @@ import {db} from "../../firebase/firebase";
 import {collection,addDoc, serverTimestamp} from "firebase/firestore";
 import Form from '../Form/Form';
 
-const Cart = ({formData}) =>{
+const Cart = () =>{
      const {products,deleteProduct,calcTotal} = useContext(CartContext)
 
      const [idSale,setIdSale] = useState("");
@@ -18,11 +18,19 @@ const Cart = ({formData}) =>{
 
     const total = calcTotal();
 
-    const buyer = {
+    /* const buyer = {
         name: "Pepito",
         phone: "11 1111-1111",
         email: "pepito@grillo.com"
     }
+ */
+    const buyer={};
+
+    const onSend = (name,phone,email) =>{
+        buyer.name=name;
+        buyer.phone=phone;
+        buyer.email=email;
+   }
 
     const checkout = () =>{
         addDoc(collection(db,"sales"),{
@@ -40,9 +48,8 @@ const Cart = ({formData}) =>{
     }
 
     return(
+        <>
             <div className="cart-container">
-                <Form />
-                {console.log(formData)}
                 <h4>Productos en el carrito:</h4>
                {products.map((prod)=>(
                     <div className="cart-row" key={prod.id}>
@@ -57,8 +64,10 @@ const Cart = ({formData}) =>{
                     </div>
                ))} 
                 <div className="total">Total $: {total}</div>
+                <Form onSend={onSend} />
                 <div className="finish">{(idSale)?<span>Tu id de compra es: {idSale}</span>:<button onClick={checkout}>Finalizar compra</button>}</div>
             </div>
+        </>
     );
 };
 

@@ -4,7 +4,6 @@
 Esta tienda tiene como propósito la venta de artículos para regalar a tu amigo músico.
 
 ### ¿Cómo utilizar el sitio? 
-#### ¡Fácil!
 
 * Navegá entre las categorías
 * Elegí tu producto
@@ -24,4 +23,4 @@ Este proyecto basado en React incluye las siguientes librerías/herramientas:
 2. ```npm i ```
 3. ```npm start```
 
-[Ver deploy en Netlify](https://app.netlify.com/sites/inspiring-heliotrope-9f0fea/overview)
+[Ver deploy en Netlify](https://inspiring-heliotrope-9f0fea.netlify.app/)
