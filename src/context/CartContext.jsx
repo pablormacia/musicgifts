@@ -21,22 +21,17 @@ const CartCustomProvider = ({children}) =>{
         getQuantity();
     },[products])
 
-    useEffect(()=>{
-        deleteProduct();
-    },[products])
 
 
 
     const addProduct = (product, qty) =>{
         //Agrega qty cantidad del producto al carrito
         if(isInCart(product.id)){
-            const newProducts = amountQty(product.id, qty);
-            localStorage.setItem('items', JSON.stringify(newProducts));    
+            const newProducts = amountQty(product.id, qty); 
             setProducts(newProducts)
 
         }else{
             const newProducts = [...products,product]
-            localStorage.setItem('items', JSON.stringify(newProducts));
             setProducts(newProducts)
         }
         
@@ -53,7 +48,6 @@ const CartCustomProvider = ({children}) =>{
     const deleteProduct = (productId) =>{
         //Elimina un producto del carrito según su id
         const cart = products.filter((prod)=>prod.id!==productId);
-        localStorage.setItem('items', JSON.stringify(cart));
         setProducts(cart);
     }
 

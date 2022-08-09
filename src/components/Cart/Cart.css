@@ -3,9 +3,25 @@
     margin: 0 auto;
 }
 
+.finish button{
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    color: #FFF;
+    background-color: rgb(170, 206, 13);
+    cursor:pointer;
+}
+
 .cart-row{
     display: flex;
+    justify-content: flex-start;
     align-items: center;
+}
+
+.cart-row button{
+    padding: 1rem;
+    border: none;
+    cursor:pointer;
 }
 
 .cart-row>div{

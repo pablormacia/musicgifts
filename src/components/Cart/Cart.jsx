@@ -3,22 +3,14 @@ import { CartContext } from "../../context/CartContext";
 import './Cart.css';
 import {Link} from 'react-router-dom';
 import {db} from "../../firebase/firebase";
-import {collection,addDoc, serverTimestamp} from "firebase/firestore"
+import {collection,addDoc, serverTimestamp} from "firebase/firestore";
+import Form from '../Form/Form';
 
-const Cart = () =>{
-     const {deleteProduct,calcTotal} = useContext(CartContext)
+const Cart = ({formData}) =>{
+     const {products,deleteProduct,calcTotal} = useContext(CartContext)
 
      const [idSale,setIdSale] = useState("");
-     const [products, setItems] = useState([]);
      
-     useEffect(() => {
-        const products = JSON.parse(localStorage.getItem('items'));
-        if (products) {
-         setItems(products);
-        }
-      }, []);
-      
-     console.log(products)
 
     if(products.length===0){
         return(<div className="cart-container"><h4>No hay productos en el carrito</h4><Link to="/"><button>Explorar</button></Link></div>);
@@ -49,6 +41,8 @@ const Cart = () =>{
 
     return(
             <div className="cart-container">
+                <Form />
+                {console.log(formData)}
                 <h4>Productos en el carrito:</h4>
                {products.map((prod)=>(
                     <div className="cart-row" key={prod.id}>
@@ -63,7 +57,7 @@ const Cart = () =>{
                     </div>
                ))} 
                 <div className="total">Total $: {total}</div>
-                <div>{(idSale)?<span>Tu id de compra es: {idSale}</span>:<button onClick={checkout}>Finalizar compra</button>}</div>
+                <div className="finish">{(idSale)?<span>Tu id de compra es: {idSale}</span>:<button onClick={checkout}>Finalizar compra</button>}</div>
             </div>
     );
 };
